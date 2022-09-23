@@ -1,0 +1,130 @@
+---
+title: "Unit - I ggplot2 Assignment"
+author: "FAREEDUL ASLAM P"
+date: "23/9/2022"
+output: html_document
+---
+
+### ASSIGNMENT QUESTIONS AND SOLUTIONS
+
+#### Introduction Exercises:  
+
+QUESTION 1:
+
+What happens if you make a scatterplot of class versus drv? Why is the plot not useful?
+
+```{r}
+            ggplot(mpg, aes(x=class,y=drv))+
+                geom_point()
+```
+The plot is not useful because the variable drv and class are categorical variables.
+
+QUESTION 2:
+
+What’s gone wrong with this code? Why are the points not blue?
+ggplot(data = mpg) + 
+geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+
+ANSWER : The points are not blue because the parameter color is included with aesthetic.If color is placed outside
+displays the points in blue color.
+
+```{r}
+              ggplot(data = mpg) + 
+geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```
+QUESTION 3:
+
+a)	What happens if you map a aesthetic to something other than a variable name, like aes(colour = displ < 5)?                                                    
+```{r}
+              ggplot(data=mpg)+
+geom_point(aes(x = displ,y = hwy,color = displ<5))
+```
+b)	What does the stroke aesthetic do? What shapes does it work with?
+
+```{r}
+                     ggplot(data=mpg)+
+geom_point(mapping = aes(x = displ,y = hwy),stroke=3)
+```
+Stroke is used to adjust the border size for shapes.It work with points (geom_point) shape.
+
+QUESTION 4:
+
+Read? Facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol variables?
+
+ANSWER : The arguments nrow (ncol) determines the number of rows (columns) to use when laying out the facets. It is necessary since facet_wrap() only facets on one variable.
+
+The nrow and ncol arguments are unnecessary for facet_grid() since the number of unique values of the variables specified in the function determines the number of rows and columns.
+
+QUESTION 5:
+
+a)	What plots does the following code make? What does . do?  
+ggplot(data = mpg) + 
+geom_point(mapping = aes(x = displ, y = hwy)) +
+facet_grid(drv ~ .)
+
+```{r}
+ggplot(data = mpg)+
+  geom_point(mapping=aes(x=displ,y=hwy))+facet_grid(. ~ cyl)
+
+```
+b)	When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?            
+ANSWER : here will be more space for columns if the plot 
+is laid out horizontally (landscape)
+
+QUESTION 6:
+
+What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
+
+  ANSWER : linechart:geom_line()
+          box plot:geom_boxplot()
+          histogram:geom_histogram()
+          area chart:geom_area()
+QUESTION 7:
+
+Will these two graphs look different? Why/why not?
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+     geom_point() +
+     geom_smooth()
+ggplot() +
+     geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) +
+     geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+     
+ANSWER :  No,the two graphs looks similar.because both geom_point() and geom_smooth()
+use same data and mappings
+
+     
+QUESTION 8:
+
+ What does geom_col() do? How is different to geom_bar()?
+ 
+  ANSWER :  The geom_col() function has different default stat than geom_bar(). The default stat of geom_col() is stat_identity(), which leaves the data as is. The geom_col() function expects that the data contains x values and y values which represent the bar height.
+
+The default stat of geom_bar() is stat_count(). The geom_bar() function only expects an x variable. The stat, stat_count(), preprocesses input data by counting the number of observations for each value of x. The y aesthetic uses the values of these counts.
+
+QUESTION 9:
+
+What is the default geom associated with stat_summary()? How could you rewrite the previous plot to use that geom function instead of the stat function?
+
+```{r}
+ggplot(data = mpg, mapping =aes(x =cty, y =hwy)) +
+geom_point() 
+```
+QUESTION 10:
+
+What does the plot below tell you about the relationship between city and highway mpg? Why is coord_fixed() important? What does geom_abline() do?
+ggplot(data = mpg, mapping =aes(x =cty, y =hwy)) +
+geom_point() +
+geom_abline() +
+coord_fixed()
+
+```{r}
+  ggplot(data = mpg, mapping =aes(x =cty, y =hwy)) +
+geom_point() +
+geom_abline() +
+coord_fixed()
+
+
+```
+
+
+
